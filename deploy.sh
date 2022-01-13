@@ -1,1 +1,1 @@
-surge --project ./build --domain 3semestereksamen.surge.sh
+surge --project ./build --domain 3semesterEksamen.surge.sh
