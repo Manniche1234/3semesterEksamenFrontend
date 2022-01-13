@@ -1,4 +1,4 @@
-const Server_URL = "http://localhost:8080/CA2_Group_war_exploded";
+const Server_URL = "https://manlyman69.rocks/3semEksamen/";
 
 const catFacts_URL =
   "http://localhost:8080/CA2_Group_war_exploded/api/info/catfact";

@@ -10,10 +10,11 @@ import {
   useRouteMatch,
 } from "react-router-dom";
 import HomeNested from "./HomeNested";
+import DinnerEvents from "./DinnerEvents";
 import AdminManger from "./AdminManager";
-import GetCatFacts from "./GetCatFacts";
-import GetIp from "./GetIp";
-import GetBTCPrice from "./GetBTCPrice";
+import CreateNewEvent from "./CreateNewEvent";
+import UpdateEvent from "./UpdateEvent";
+
 
 
 export default function Nesting(props) {
@@ -27,26 +28,26 @@ export default function Nesting(props) {
             <Route exact path="/">
               <Home />
             </Route>
-            <Route path="/catfacts">
-              <GetCatFacts />
+
+            <Route exact path="/events">
+            <DinnerEvents />
             </Route>
-            <Route path="/ip">
-              <GetIp />
-            </Route>
-            <Route path="/btcprice">
-              <GetBTCPrice />
-            </Route>
-        
             {userrole === "admin" && (
               <Route path="/admin">
                 <AdminManger />
               </Route>
             )}
             {userrole === "admin" && (
-              <Route path="/topics">
-                <Topics />
+              <Route path="/newEvent">
+              <CreateNewEvent/>
               </Route>
             )}
+            {userrole === "admin" && (
+              <Route path="/updateEvent">
+                <UpdateEvent />
+              </Route>
+            )}
+          
           </Switch>
         </div>
       </div>
@@ -59,37 +60,36 @@ const Header = (props) => {
   return (
     <ul className="header">
       <li>
-        <NavLink exact activeClassName="selected" to="/">
+        <NavLink exact activeclassename="selected" to="/">
           Home
         </NavLink>
-      </li>
+      </li> 
+
       <li>
-        <NavLink activeClassName="selected" to="/catfacts">
-          Cat Facts
+        <NavLink exact activeclassename="Selected" to="/events">
+          Events
         </NavLink>
       </li>
-      <li>
-        <NavLink activeClassName="selected" to="/ip">
-          Your IP
-        </NavLink>
-      </li>
-      <li>
-        <NavLink activeClassName="selected" to="/btcprice">
-          BTC Price
-        </NavLink>
-      </li>
-      
+     
+      )
       {userrole === "admin" && (
         <li>
-          <NavLink activeClassName="selected" to="/topics">
-            Topics
+          <NavLink activeclassename="selected" to="/admin">
+            Admin
           </NavLink>
         </li>
       )}
       {userrole === "admin" && (
         <li>
-          <NavLink activeClassName="selected" to="/admin">
-            Admin
+          <NavLink activeclassename="selected" to="/newEvent">
+            Nyt event
+          </NavLink>
+        </li>
+      )}
+      {userrole === "admin" && (
+        <li>
+          <NavLink activeclassename="selected" to="/updateEvent">
+            Update event
           </NavLink>
         </li>
       )}

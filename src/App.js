@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import facade from "./apiFacade";
 import Nesting from "./components/NestedRoutes";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function LogIn({ login }) {
   const init = { username: "", password: "" };
