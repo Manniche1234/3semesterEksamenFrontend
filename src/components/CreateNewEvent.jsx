@@ -22,8 +22,9 @@ const CreateNewEvent = () => {
     const handleChange = (evt) => {
         setNewEvent({ ...newEvent, [evt.target.id]: evt.target.value });
       };
+      
 if(!eventAdded)
-return <div margin-botton="20px" onChange={handleChange} onSubmit={addEvent}>
+return <div onChange={handleChange} onSubmit={addEvent}>
 
 <Form>
   <Form.Group className="mb-3" controlId="location">
