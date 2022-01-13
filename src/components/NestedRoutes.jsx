@@ -11,7 +11,6 @@ import {
 } from "react-router-dom";
 import HomeNested from "./HomeNested";
 import DinnerEvents from "./DinnerEvents";
-import AdminManger from "./AdminManager";
 import CreateNewEvent from "./CreateNewEvent";
 import UpdateEvent from "./UpdateEvent";
 
@@ -28,15 +27,12 @@ export default function Nesting(props) {
             <Route exact path="/">
               <Home />
             </Route>
-
-            <Route exact path="/events">
+            {userrole === "user" && (
+              <Route exact path="/events">
             <DinnerEvents />
             </Route>
-            {userrole === "admin" && (
-              <Route path="/admin">
-                <AdminManger />
-              </Route>
             )}
+        
             {userrole === "admin" && (
               <Route path="/newEvent">
               <CreateNewEvent/>
@@ -65,20 +61,14 @@ const Header = (props) => {
         </NavLink>
       </li> 
 
+      {userrole === "user" &&(
       <li>
         <NavLink exact activeclassename="Selected" to="/events">
           Events
         </NavLink>
       </li>
-     
-      )
-      {userrole === "admin" && (
-        <li>
-          <NavLink activeclassename="selected" to="/admin">
-            Admin
-          </NavLink>
-        </li>
       )}
+
       {userrole === "admin" && (
         <li>
           <NavLink activeclassename="selected" to="/newEvent">
@@ -89,7 +79,7 @@ const Header = (props) => {
       {userrole === "admin" && (
         <li>
           <NavLink activeclassename="selected" to="/updateEvent">
-            Update event
+            Update og slet event
           </NavLink>
         </li>
       )}
