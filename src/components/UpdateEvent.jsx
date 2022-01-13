@@ -10,32 +10,29 @@ const UpdateEvent = () => {
     const [dataIsLoaded, setDataIsLoaded] = useState(false);
     const [responsFromBackEnd, setResponsFrombackEnd] = useState();
     const [isUpdateEvent, setIsUpdateEvent] = useState(false);
+    const [dataReady, setDataReady] = useState (false);
 
     
-    useEffect(() => {
-        setDataIsLoaded(false);
-        fetch(Server_URL + "api/event/all")
+    function getdata() {
+        if (!dataReady) {
+        const options = facade.makeOptions("GET", true);
+        fetch(Server_URL + "api/event/all", options)
             .then((res) => res.json())
             .then ((json) => {
                 setDinnerEvent(json);
-                setDataIsLoaded(true)
-            })
-    }, [])
+                setDataReady(true);
+        })
+    }}
 
-
-    if (!dataIsLoaded)
-    return (
-        <div>
-            <h1>Henter Data! Vent venligst.</h1>
-        </div>
-    );
-
-    const updateEvent = (evt) => {
+    
+    const updateEvent = () => {
+        setIsUpdateEvent(false);
+        setDataReady(false);
         const option = facade.makeOptions("PUT",true, responsFromBackEnd);
         fetch(Server_URL + "api/event/updateevent", option)
             .then((res)=> res.json())
             .then((json)=> {
-                setIsUpdateEvent(false);
+                
             })
     }
 
@@ -59,11 +56,12 @@ const UpdateEvent = () => {
     
 
     const deleteEvent = (evt) =>{
+        setDataReady(false);
         const option = facade.makeOptions("DELETE",true);
         fetch(Server_URL + "api/event/deleteevent/" + evt.target.value, option)
             .then((res)=> res.json())
             .then((json) => {
-                
+            
             })
     }
     
@@ -76,6 +74,7 @@ const UpdateEvent = () => {
         setResponsFrombackEnd({ ...responsFromBackEnd, [evt.target.id]: evt.target.value });
       };
 
+    if(dataReady){  
     if(!isUpdateEvent)
     return (
     <div onChange={handleChange}>
@@ -136,9 +135,9 @@ const UpdateEvent = () => {
   </Button>
 </Form>
 </div>
-  
-    
-    
+
+    }
+    else return <div>loading...{getdata()}</div>
 }
 
 export default UpdateEvent;
